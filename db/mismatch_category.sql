@@ -4,8 +4,8 @@ CREATE TABLE `mismatch_category` (
   PRIMARY KEY (`category_id`)
 );
 
-INSERT INTO `mismatch_category` VALUES (1, 'Appearance');
-INSERT INTO `mismatch_category` VALUES (2, 'Entertainment');
-INSERT INTO `mismatch_category` VALUES (3, 'Food');
-INSERT INTO `mismatch_category` VALUES (4, 'People');
-INSERT INTO `mismatch_category` VALUES (5, 'Activities');
+INSERT INTO `mismatch_category` VALUES (1, 'Aparência');
+INSERT INTO `mismatch_category` VALUES (2, 'Entretenimento');
+INSERT INTO `mismatch_category` VALUES (3, 'Comida');
+INSERT INTO `mismatch_category` VALUES (4, 'Pessoa');
+INSERT INTO `mismatch_category` VALUES (5, 'Atividades');
