@@ -1,0 +1,27 @@
+<!-- Percorre o array dos dados do usuário, formatando-os como HTML -->
+<h4>Membros mais recentes:</h4>
+<table>
+    <?php foreach ($users  as $user) : ?>
+        <tr>
+        <?php if (is_file(MM_UPLOADPATH . $user->picture) AND filesize(MM_UPLOADPATH . $user->picture) > 0)  : ?>
+            <td>
+                <img src="<?= MM_UPLOADPATH . $user->picture ?>" alt="<?= $user->first_name ?>" />
+            </td>
+        <?php else : ?>
+            <td>
+                <img src="<?= MM_UPLOADPATH . 'nopic.jpg' ?>" alt="<?= $user->first_name ?>" />
+            </td>
+        <?php endif ?>
+
+        <?php if (isset($_SESSION['user_id'])) : ?>
+            <td>
+                <a href="./?route=viewprofile&user_id=<?= $user->user_id ?>">
+                    <?= $user->first_name ?>
+                </a>
+            </td>
+        <?php else : ?>
+            <td><?= $user->first_name ?></td>
+        <?php endif ?>
+        </tr>
+    <?php endforeach ?>
+</table>

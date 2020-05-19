@@ -1,0 +1,20 @@
+<!-- Se a variável de sessão está vazia, mostrar alguma mensagem de erro e o formulário de login, caso contrário, confirme o login -->
+<?php if (empty($_SESSION['user_id'])) : ?>
+    <p class="error"><?= $error_msg ?></p>
+
+    <form method="post" action="./?route=login">
+        <fieldset>
+            <legend>Entrar</legend>
+            <label for="username">Nome de usuário:</label>
+            <input type="text" id="username" name="username" required value="<?= $user_username ?>" />
+            <br />
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required />
+        </fieldset>
+        <br>
+        <button type="submit">Entrar</button>
+    </form>
+<?php else : ?>
+    <!-- Confirmar o login com sucesso -->
+    <p class="login">Você está logado como <?= $_SESSION['username'] ?>.</p>
+<?php endif ?>

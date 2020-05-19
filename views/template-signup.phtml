@@ -1,0 +1,37 @@
+<?php if ($success) : ?>
+    <p>
+        Sua nova conta foi criada com sucesso. Você agora está pronto para 
+        <a href="./?route=login">entrar</a>.
+    </p>
+<?php endif ?>
+
+<?php if ($error_username) : ?>
+    <p class="error">
+        Uma conta já existe para este nome de usuário. Por favor utilize um nome de usuário diferente.
+    </p>
+<?php endif ?>
+
+<?php if ($error_empty) : ?>
+    <p class="error">
+        Você deve digitar todos os dados do cadastro, incluindo a senha desejada duas vezes.
+    </p>
+<?php endif ?>
+
+<p>Por favor digite seu nome de usuário e senha desejada para cadastrar no Mismatch.</p>
+
+<form method="post" action="./?route=signup">
+    <fieldset>
+        <legend>Informações de Registro</legend>
+        <label for="username">Nome de usuário:</label>
+        <input type="text" name="username" value="<?= $username ?>" required />
+        <br />
+        <label for="password1">Senha:</label>
+        <input type="password" name="password1" required />
+        <br />
+        <label for="password2">Senha (redigitar):</label>
+        <input type="password" name="password2" required />
+        <br />
+    </fieldset>
+    <br>
+    <button type="submit">Cadastrar</button>
+</form>
