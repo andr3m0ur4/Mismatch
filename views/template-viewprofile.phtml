@@ -1,0 +1,88 @@
+<!-- Tenha certeza de que o usuário está logado antes de prosseguir. -->
+<?php if (!isset($_SESSION['user_id'])) : ?>
+    <p class="login">Por favor <a href="./?route=login">entre</a> para acessar esta página.</p>
+    <?php exit() ?>
+<?php endif ?>
+
+<?php if ($user = $user->getUser()) : ?>
+
+    <!-- O registro do usuário foi encontrado, então, exibir os dados do usuário -->
+    <table>
+        <?php if (!empty($user->__get('username'))) : ?>
+            <tr>
+                <td class="label">Nome de usuário:</td>
+                <td><?= $user->username ?></td>
+            </tr>
+        <?php endif ?>
+
+        <?php if (!empty($user->__get('first_name'))) : ?>
+            <tr>
+                <td class="label">Nome:</td>
+                <td><?= $user->first_name ?></td>
+            </tr>
+        <?php endif ?>
+
+        <?php if (!empty($user->__get('last_name'))) : ?>
+            <tr>
+                <td class="label">Sobrenome:</td>
+                <td><?= $user->last_name ?></td>
+            </tr>
+        <?php endif ?>
+
+        <?php if (!empty($user->__get('gender'))) : ?>
+            <tr>
+                <td class="label">Gênero:</td>
+                <td>
+		            <?php if ($user->__get('gender') == 'M') : ?>
+		                Masculino
+		            <?php elseif ($user->__get('gender') == 'F') : ?>
+		                Feminino
+		            <?php else : ?>
+		                ?
+		            <?php endif ?>
+            	</td>
+            </tr>
+        <?php endif ?>
+
+        <?php if (!empty( $user->__get('birthdate'))) : ?>
+            <?php if (!isset($_GET['user_id']) || ($_SESSION['user_id'] == $_GET['user_id'])) : ?>
+                <!--  Mostrar ao usuário sua própria dada de nasimento -->
+                <tr>
+                    <td class="label">Data de nascimento:</td>
+                    <td><?= date("d-m-Y", strtotime($user->birthdate)) ?></td>
+                </tr>
+            <?php else : ?>
+                <!-- Mostrar somente o ano de nascimento para todos os outros -->
+                <?php list($year, $month, $day) = explode('-', $user->birthdate) ?>
+
+                <tr>
+                    <td class="label">Ano de nascimento:</td>
+                    <td><?= $year ?></td>
+                </tr>
+            <?php endif ?>
+        <?php endif ?>
+
+        <?php if (!empty($user->city) || !empty($user->state)) : ?>
+            <tr>
+                <td class="label">Localização:</td>
+                <td><?= $user->city . ', ' . $user->state ?></td>
+            </tr>
+        <?php endif ?>
+
+        <?php if (!empty($user->picture)) : ?>
+            <tr>
+                <td class="label">Foto:</td>
+                <td>
+                	<img src="<?= MM_UPLOADPATH . $user->picture ?>" alt="Foto de Perfil" />
+                </td>
+            </tr>
+        <?php endif ?>
+    </table>
+
+    <?php if (!isset($_GET['user_id']) || ($_SESSION['user_id'] == $_GET['user_id'])) : ?>
+        <p>Você gostaria de <a href="./?route=editprofile">editar seu perfil</a>?</p>
+    <?php endif ?>
+<?php else : ?>
+	<!-- Fim da verificação para um único registro dos resultados do usuário -->
+    <p class="error">Ocorreu um problema acessando o seu perfil.</p>
+<?php endif ?>

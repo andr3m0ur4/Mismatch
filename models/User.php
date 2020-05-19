@@ -38,6 +38,24 @@
 			return $data->fetchAll(PDO::FETCH_CLASS, 'User');
 		}
 
+		public function getUser()
+		{
+			$query = '
+				SELECT username, first_name, last_name, gender, birthdate, city, state, picture
+                FROM mismatch_user WHERE user_id = :user_id
+            ';
+
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue('user_id', $this->__get('user_id'));
+            $stmt->execute();
+            
+            if ($stmt->rowCount() == 1) {
+            	return $stmt->fetchObject('User');
+            }
+
+            return false;
+		}
+
 		public function verifyUser()
 		{
 			$query = '
