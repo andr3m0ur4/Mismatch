@@ -9,6 +9,8 @@
     require_once './helpers/functions.php';
     require_once './models/Service.php';
     require_once './models/User.php';
+    require_once './models/Response.php';
+    require_once './models/Topic.php';
 
     // Verificar qual arquivo (rota) deve ser usado para tratar a requisição
 

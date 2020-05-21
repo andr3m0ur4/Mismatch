@@ -1,0 +1,78 @@
+<?php if ($error_profile) : ?>
+	<p class="error">Ocorreu um problema acessando o seu perfil.</p>
+<?php endif ?>
+
+<?php if ($error_move) : ?>
+	<p class="error">
+        Desculpa, ocorreu um problema realizando o upload de sua foto.
+    </p>
+<?php endif ?>
+
+<?php if ($error) : ?>
+	<p class="error">
+        Sua foto deve ser um arquivo de imagem GIF, JPEG, ou PNG, não maior que
+        <?= (MM_MAXFILESIZE / 1024) ?> KB e <?= MM_MAXIMGWIDTH ?>x<?= MM_MAXIMGHEIGHT ?> pixels de tamanho.
+    </p>
+<?php endif ?>
+
+<?php if ($success) : ?>
+	<p>
+        Seu perfil foi atualizado com sucesso. Você gostaria de
+        <a href="./?route=viewprofile">visualizar seu perfil</a>?
+    </p>
+    <?php exit() ?>
+<?php endif ?>
+
+<?php if ($error_data) : ?>
+	<p class="error">Você deve digitar todos os dados do perfil (a foto é opcional).</p>
+<?php endif ?>
+
+<form enctype="multipart/form-data" method="post" action="./?route=editprofile">
+    <input type="hidden" name="MAX_FILE_SIZE" value="<?= MM_MAXFILESIZE ?>">
+
+    <fieldset>
+        <legend>Informação Pessoal</legend>
+        <label for="firstname">Nome:</label>
+        <input type="text" id="firstname" name="firstname" required value="<?= $first_name ?>">
+        <br>
+
+        <label for="lastname">Sobrenome:</label>
+        <input type="text" id="lastname" name="lastname" required value="<?= $last_name ?>">
+        <br>
+
+        <label for="gender">Gênero:</label>
+        <select id="gender" name="gender">
+            <option value="M" <?php if ($gender == 'M') echo 'selected' ?>>
+                Masculino
+            </option>
+            <option value="F" <?php if ($gender == 'F' ) echo 'selected' ?>>
+                Feminino
+            </option>
+        </select>
+        <br>
+
+        <label for="birthdate">Data de nascimento:</label>
+        <input type="date" id="birthdate" name="birthdate" placeholder="YYYY-MM-DD" value="<?= $birthdate ?>" required>
+        <br>
+
+        <label for="city">Cidade:</label>
+        <input type="text" id="city" name="city" required value="<?= $city ?>">
+        <br>
+
+        <label for="state">Estado:</label>
+        <input type="text" id="state" name="state" required value="<?= $state ?>">
+        <br>
+
+        <input type="hidden" name="old_picture" value="<?= $old_picture ?>">
+
+        <label for="new_picture">Foto:</label>
+        <input type="file" id="new_picture" name="new_picture">
+
+        <?php if (!empty($old_picture)) : ?>
+            <img class="profile" src="<?= MM_UPLOADPATH . $old_picture ?>" alt="Foto de Perfil">
+        <?php endif ?>
+    </fieldset>
+    <br>
+
+    <button type="submit">Salvar Perfil</button>
+</form>

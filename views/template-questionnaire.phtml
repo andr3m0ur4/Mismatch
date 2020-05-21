@@ -1,0 +1,35 @@
+<?php if ($success) : ?>
+    <p>Suas respostas foram salvas.</p>
+<?php endif ?>
+
+<form method="post" action="./?route=questionnaire">
+    <p>Como você se sente sobre cada tópico?</p>
+
+    <fieldset>
+        <legend><?= $responses[0]->category_name ?></legend>
+
+        <?php foreach ($responses as $response) : ?>
+        <!--  Somente iniciar um novo conjunto de campos se a categoria for alterada -->
+            <?php if ($category != $response->category_name) : ?>
+                <?php $category = $response->category_name ?>
+                </fieldset>
+
+                <fieldset>
+                    <legend><?= $response->category_name ?></legend>
+            <?php endif ?>
+
+            <!-- Exibir o campo de formulário do tópico -->
+            <label <?= verify_null($response->response) ?> for="<?= $response->response_id ?>">
+                <?= $response->topic_name ?>:
+            </label>
+
+            <input type="radio" id="<?= $response->response_id ?>" name="<?= $response->response_id ?>" value="1" <?= love($response->response) ?> />Amo
+
+            <input type="radio" id="<?= $response->response_id ?>" name="<?= $response->response_id ?>" value="2" <?= hate($response->response) ?> />Odeio
+            <br>
+        <?php endforeach ?>
+    </fieldset>
+    <br>
+
+    <button type="submit">Salvar Questionário</button>
+</form>

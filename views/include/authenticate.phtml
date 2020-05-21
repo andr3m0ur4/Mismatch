@@ -1,0 +1,4 @@
+<?php if (!isset($_SESSION['user_id'])) : ?>
+    <p class="login">Por favor <a href="./?route=login">entre</a> para acessar esta página.</p>
+    <?php exit() ?>
+<?php endif ?>

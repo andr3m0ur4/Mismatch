@@ -94,4 +94,32 @@
 
             return true;
 		}
+
+		public function update()
+		{
+			$query = '
+				UPDATE mismatch_user SET 
+                    first_name = :first_name,
+                    last_name = :last_name,
+                    gender = :gender,
+                    birthdate = :birthdate,
+                    city = :city,
+                    state = :state,
+                    picture = :picture
+                WHERE user_id = :user_id
+            ';
+
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':first_name', $this->__get('first_name'));
+            $stmt->bindValue(':last_name', $this->__get('last_name'));
+            $stmt->bindValue(':gender', $this->__get('gender'));
+            $stmt->bindValue(':birthdate', $this->__get('birthdate'));
+            $stmt->bindValue(':city', $this->__get('city'));
+            $stmt->bindValue(':state', $this->__get('state'));
+            $stmt->bindValue(':picture', $this->__get('picture'));
+            $stmt->bindValue(':user_id', $this->__get('user_id'));
+            $stmt->execute();
+
+            return true;
+		}
 	}

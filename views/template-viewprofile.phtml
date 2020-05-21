@@ -1,9 +1,3 @@
-<!-- Tenha certeza de que o usuário está logado antes de prosseguir. -->
-<?php if (!isset($_SESSION['user_id'])) : ?>
-    <p class="login">Por favor <a href="./?route=login">entre</a> para acessar esta página.</p>
-    <?php exit() ?>
-<?php endif ?>
-
 <?php if ($user = $user->getUser()) : ?>
 
     <!-- O registro do usuário foi encontrado, então, exibir os dados do usuário -->

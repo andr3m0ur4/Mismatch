@@ -23,7 +23,7 @@
                     // O login está OK, então definir as variáveis de sessão do ID do usuário
                     // e nome de usuário (e cookies),
                     // por fim, redirecionar para a página principal
-                    $user = $user->verifyUser()->fetch(PDO::FETCH_OBJ);
+                    $user = $user->verifyUser()->fetchObject('User');
 
                     $_SESSION['user_id'] = $user->user_id;
                     $_SESSION['username'] = $user->username;
