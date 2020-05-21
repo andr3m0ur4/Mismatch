@@ -56,6 +56,16 @@
             return false;
 		}
 
+		public function getOthers()
+		{
+			$query = 'SELECT user_id FROM mismatch_user WHERE user_id != :user_id';
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindValue(':user_id', $this->__get('user_id'));
+			$stmt->execute();
+
+			return $stmt->fetchAll(PDO::FETCH_CLASS, 'User');
+		}
+
 		public function verifyUser()
 		{
 			$query = '

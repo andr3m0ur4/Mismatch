@@ -50,6 +50,20 @@
             return $stmt->fetchAll(PDO::FETCH_CLASS, 'Response');
 		}
 
+		public function getResponseById()
+		{
+			$query = '
+				SELECT response_id, topic_id, response FROM mismatch_response
+				WHERE user_id = :user_id
+			';
+			
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindValue(':user_id', $this->__get('user_id'));
+			$stmt->execute();
+
+			return $stmt;
+		}
+
 		public function insert()
 		{
 			$query = 'INSERT INTO mismatch_response (user_id, topic_id) VALUES (:user_id, :topic_id)';

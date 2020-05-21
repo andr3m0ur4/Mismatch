@@ -1,0 +1,58 @@
+<?php if (!$view) : ?>
+    <p>
+        Você deve primeiro <a href="./?route=questionnaire">responder o questionário</a> antes de você poder ser mismatched.
+    </p>
+    <?php exit() ?>
+<?php endif ?>
+
+<table>
+    <tr>
+        <td class="label">
+            <?php if (!empty($user->__get('first_name')) AND !empty($user->__get('last_name'))) : ?>
+                <?= $user->first_name . ' ' . $user->last_name ?>
+                <br>
+            <?php endif ?>
+
+            <?php if (!empty($user->__get('city')) AND !empty($user->__get('state'))) : ?>
+                <?= $user->city . ', ' . $user->state ?>
+                <br>
+            <?php endif ?>
+        </td>
+        <td>
+            <?php if (!empty($user->__get('picture'))) : ?>
+                <img src="<?= MM_UPLOADPATH . $user->picture ?>" alt="Foto de Perfil" />
+                <br>
+            <?php endif ?>
+        </td>
+    </tr>
+</table>
+
+<!-- Exibir os tópicos mismatched em uma tabela com quatro colunas -->
+<h4>Você é mismatched nos seguintes <?= count($mismatch_topics) ?> tópicos:</h4>
+
+<table>
+    <tr>
+        <?php $i = 0 ?>
+        <?php foreach ($mismatch_topics as $topic) : ?>
+            <td><?= $topic ?></td>
+
+            <?php if (++$i > 3) : ?>
+                </tr>
+                <tr>
+                <?php $i = 0 ?>
+            <?php endif ?>
+        <?php endforeach ?>
+    </tr>
+</table>
+
+<!-- Gera e exibe a barra de imagem gráfica da categoria mismatched -->
+<h4>Divisão de categoria mismatched:</h4>
+
+<img src="<?= MM_UPLOADPATH . $_SESSION['user_id'] . '-mymismatchgraph.png'?>" alt="Gráfico de categoria do Mismatch" />
+<br>
+
+<!-- Exibe um link para o perfil do usuário mismatch -->
+<h4>
+    Visualizar
+    <a href=./?route=viewprofile&user_id=<?= $mismatch_user_id ?>>Perfil de <?= $user->first_name ?></a>.
+</h4>

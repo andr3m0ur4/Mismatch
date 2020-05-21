@@ -1,6 +1,39 @@
-<?php  
-    // Personalizar função para desenhar uma barra gráfica, dado um conjunto de dados, valor máximo, e nome do
-    // arquivo da imagem
+<?php 
+
+	function has_post() {
+		if (count($_POST) > 0) {
+			return true;
+		}
+
+		return false;
+	}
+
+	function verify_null($value) {
+		if (is_null($value)) {
+			return 'class="error"';
+		}
+
+		return '';
+	}
+
+	function love($value) {
+		if ($value == 1) {
+			return 'checked="checked"';
+		}
+
+		return '';
+	}
+
+	function hate($value) {
+		if ($value == 2) {
+			return 'checked="checked"';
+		}
+
+		return '';
+	}
+
+	// Personalizar função para desenhar uma barra gráfica, dado um conjunto de dados, valor máximo,
+	// e nome do arquivo da imagem
     function draw_bar_graph ( $width, $height, $data, $max_value, $filename ) {
         // Criar a imagem gráfica vazia
         $img = imagecreatetruecolor ( $width, $height );

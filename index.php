@@ -6,7 +6,7 @@
     require_once './config/appvars.php';
     require_once './config/connectvars.php';
     require_once './helpers/Db.php';
-    require_once './helpers/functions.php';
+    require_once './helpers/lib_function.php';
     require_once './models/Service.php';
     require_once './models/User.php';
     require_once './models/Response.php';
